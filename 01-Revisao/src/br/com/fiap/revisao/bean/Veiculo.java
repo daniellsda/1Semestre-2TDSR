@@ -1,8 +1,13 @@
 package br.com.fiap.revisao.bean;
 
-public class Veiculo {
+//Classe abstrata -> não pode ser instanciada e
+//pode conter métodos abstratos (sem implementação)
+//serve para ser herdada
+public abstract class Veiculo {
 	
 	private String cor;
+	
+	private Tamanho porte;
 	
 	private int passageiro;
 	
@@ -10,6 +15,8 @@ public class Veiculo {
 	public Veiculo(String cor){
 		this.cor = cor;
 	}
+	
+	public abstract void ligar();
 	
 	//Sobrecarga do método
 	public void andar(int velocidade) {
@@ -34,6 +41,14 @@ public class Veiculo {
 
 	public void setPassageiro(int passageiro) {
 		this.passageiro = passageiro;
+	}
+
+	public Tamanho getPorte() {
+		return porte;
+	}
+
+	public void setPorte(Tamanho porte) {
+		this.porte = porte;
 	}
 	
 }
