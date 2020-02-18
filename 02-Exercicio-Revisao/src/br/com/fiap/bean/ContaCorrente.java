@@ -15,7 +15,7 @@ public class ContaCorrente extends Conta {
 		this.tipo = tipo;
 	}
 
-	@Override
+	@Override	
 	public void retirar(double valor) throws Exception {
 		if (tipo == TipoConta.COMUM && saldo < valor ) {
 			throw new Exception("Saldo insuficiente");

@@ -6,6 +6,7 @@ import br.com.fiap.bean.TipoConta;
 public class Teste {
 
 	public static void main(String[] args) {
+		
 		//Instanciar a conta corrente
 		ContaCorrente cc = new ContaCorrente();
 		
