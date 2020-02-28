@@ -23,4 +23,5 @@
 				value="jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl" />
 		</properties>
 	</persistence-unit>
+	
 </persistence>
