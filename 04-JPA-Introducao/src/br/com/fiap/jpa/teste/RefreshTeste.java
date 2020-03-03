@@ -6,20 +6,31 @@ import javax.persistence.Persistence;
 
 import br.com.fiap.jpa.entity.Loja;
 
-public class PesquisaTeste {
+public class RefreshTeste {
 
 	public static void main(String[] args) {
-		//Criar a fabrica de entity manager
+		//Criar a fabrica
 		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("oracle");
 		//Criar o entity manager
 		EntityManager em = fabrica.createEntityManager();
 		
-		//Pesquisar a loja de código 1
-		Loja loja = em.find(Loja.class, 21);
+		//Pesquisar uma loja
+		Loja loja = em.find(Loja.class, 1);
 		
-		//Exibir o nome da loja
+		//Exibir o nome
 		System.out.println(loja.getNome());
-		System.out.println(loja.getFaturamentoAnual());
+		
+		//Alterar o nome (setNome)
+		loja.setNome("Loja Teste");
+		
+		//Exibir o nome
+		System.out.println(loja.getNome());
+		
+		//Fazer o refresh
+		em.refresh(loja);
+		
+		//Exibir o nome
+		System.out.println(loja.getNome());
 		
 		//Fechar as paradas
 		em.close();
