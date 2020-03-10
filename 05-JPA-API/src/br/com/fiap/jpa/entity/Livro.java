@@ -39,6 +39,18 @@ public class Livro {
 	@Enumerated(EnumType.STRING)
 	@Column(name="ds_genero")
 	private Genero genero;
+	
+	public Livro(String nome, Calendar dataPublicacao, int numeroPaginas, Genero genero) {
+		super();
+		this.nome = nome;
+		this.dataPublicacao = dataPublicacao;
+		this.numeroPaginas = numeroPaginas;
+		this.genero = genero;
+	}
+
+	public Livro() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;

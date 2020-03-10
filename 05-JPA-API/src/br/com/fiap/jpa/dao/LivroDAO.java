@@ -2,6 +2,7 @@ package br.com.fiap.jpa.dao;
 
 import br.com.fiap.jpa.entity.Livro;
 import br.com.fiap.jpa.exception.DeuRuimNoBancoException;
+import br.com.fiap.jpa.exception.NaoTemLivroException;
 
 public interface LivroDAO {
 
@@ -9,7 +10,7 @@ public interface LivroDAO {
 	
 	Livro pesquisar(int codigo);
 	
-	void deletar(int codigo);
+	void deletar(int codigo) throws NaoTemLivroException;
 	
 	void atualizar(Livro livro);
 	

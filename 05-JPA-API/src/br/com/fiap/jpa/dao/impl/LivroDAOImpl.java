@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import br.com.fiap.jpa.dao.LivroDAO;
 import br.com.fiap.jpa.entity.Livro;
 import br.com.fiap.jpa.exception.DeuRuimNoBancoException;
+import br.com.fiap.jpa.exception.NaoTemLivroException;
 
 public class LivroDAOImpl implements LivroDAO {
 
@@ -17,7 +18,7 @@ public class LivroDAOImpl implements LivroDAO {
 	
 	@Override
 	public void inserir(Livro livro) {
-		em.persist(livro);	
+		em.persist(livro);		
 	}
 
 	@Override
@@ -26,8 +27,12 @@ public class LivroDAOImpl implements LivroDAO {
 	}
 
 	@Override
-	public void deletar(int codigo) {
+	public void deletar(int codigo) throws NaoTemLivroException {
 		Livro livro = pesquisar(codigo);//pesquisa o livro para remover
+		//Validar se existe um livro para ser apagado
+		if (livro ==null) {
+			throw new NaoTemLivroException();
+		}
 		em.remove(livro);	
 	}
 
