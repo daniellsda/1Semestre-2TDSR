@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -51,10 +53,10 @@ public class Loja {
 	@Transient
 	private float faturamentoAnual;
 	
-	//Método que é executado após um select
-	@PostLoad
+	//@PrePersist //executado apos o persist (cadastro)
+	@PostLoad //executado apÃ³s o select
 	public void carregar() {
-		System.out.println("Carregando informações...");
+		System.out.println("Carregando informaï¿½ï¿½es...");
 		faturamentoAnual = faturamento * 12;
 	}
 	
