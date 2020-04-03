@@ -5,6 +5,10 @@ import br.com.fiap.jpa.dao.GenericDAO;
 import br.com.fiap.jpa.exception.CommitException;
 import br.com.fiap.jpa.exception.KeyNotFoundException;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
+
+//Classe abstrata -> não pode ser instanciada (serve para a herança)
+//métodos abstratos (sem implementação)
 
 public abstract class GenericDAOImpl<T,K> implements GenericDAO<T, K> {
 
