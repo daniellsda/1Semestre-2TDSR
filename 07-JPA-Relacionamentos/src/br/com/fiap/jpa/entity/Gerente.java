@@ -1,5 +1,6 @@
 package br.com.fiap.jpa.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +28,23 @@ public class Gerente {
 	@Enumerated(EnumType.STRING)
 	@Column(name="ds_area")
 	private AreaGerente area;
+	
+	//Mapeamento bidirecional (um-para-um)
+	//Sempre que for bidirecional um lado possui o mappedBy
+	//mappedBy fica no lado que não tem a chave (FK) ou a tabela associativa
+	//mappedBy -> nome do atributo que mapeia a FK (na classe Departamento)
+	@OneToOne(mappedBy = "gerente", cascade = CascadeType.ALL)
+	private Departamento departamento;
+	
+	public Gerente(String nome, AreaGerente area) {
+		super();
+		this.nome = nome;
+		this.area = area;
+	}
+
+	public Gerente() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -49,6 +68,14 @@ public class Gerente {
 
 	public void setArea(AreaGerente area) {
 		this.area = area;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 
 	

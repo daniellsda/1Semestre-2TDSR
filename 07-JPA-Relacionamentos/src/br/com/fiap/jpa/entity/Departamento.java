@@ -1,5 +1,6 @@
 package br.com.fiap.jpa.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +29,22 @@ public class Departamento {
 	@Enumerated(EnumType.STRING)
 	@Column(name="ds_tipo")
 	private TipoDepartamento tipo;
+	
+	//Mapear a FK
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinColumn(name = "cd_gerente")
+	private Gerente gerente;
+	
+	public Departamento(String nome, TipoDepartamento tipo, Gerente gerente) {
+		super();
+		this.nome = nome;
+		this.tipo = tipo;
+		this.gerente = gerente;
+	}
+
+	public Departamento() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -49,6 +68,14 @@ public class Departamento {
 
 	public void setTipo(TipoDepartamento tipo) {
 		this.tipo = tipo;
+	}
+
+	public Gerente getGerente() {
+		return gerente;
+	}
+
+	public void setGerente(Gerente gerente) {
+		this.gerente = gerente;
 	}
 	
 }
