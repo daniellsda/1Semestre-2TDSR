@@ -1,12 +1,14 @@
 package br.com.fiap.jpa.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,6 +33,20 @@ public class Projeto {
 	@Temporal(TemporalType.DATE)
 	@Column(name="dt_entrega")
 	private Calendar dataEntrega;
+
+	@ManyToMany(mappedBy = "projetos")
+	private List<Funcionario> funcionarios;
+	
+	public Projeto(String nome, String descricao, Calendar dataEntrega) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.dataEntrega = dataEntrega;
+	}
+
+	public Projeto() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -62,6 +78,14 @@ public class Projeto {
 
 	public void setDataEntrega(Calendar dataEntrega) {
 		this.dataEntrega = dataEntrega;
+	}
+
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 	
 }

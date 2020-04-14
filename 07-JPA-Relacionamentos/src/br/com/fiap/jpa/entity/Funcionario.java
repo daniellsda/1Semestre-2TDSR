@@ -1,12 +1,19 @@
 package br.com.fiap.jpa.entity;
 
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,6 +35,30 @@ public class Funcionario {
 	@Temporal(TemporalType.DATE)
 	@Column(name="dt_admissao")
 	private Calendar dataAdmissao;
+	
+	//Pensar: da classe que estamos para a classe do relacionamento
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="cd_departamento", nullable = false)
+	private Departamento departamento;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	//name -> nome da tabela associativa
+	//joinColumns -> coluna que armazena a PK da classe que estamos
+	//inverseJoinColumns -> coluna que armazena a PK da outra classe (projeto)
+	@JoinTable(name="TB_PROJETO_FUNCIONARIO",
+			joinColumns = @JoinColumn(name="cd_funcionario"),
+			inverseJoinColumns = @JoinColumn(name="cd_projeto"))
+	private List<Projeto> projetos;
+	
+	public Funcionario(String nome, Calendar dataAdmissao) {
+		super();
+		this.nome = nome;
+		this.dataAdmissao = dataAdmissao;
+	}
+
+	public Funcionario() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -51,6 +82,22 @@ public class Funcionario {
 
 	public void setDataAdmissao(Calendar dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
 	}
 	
 }
