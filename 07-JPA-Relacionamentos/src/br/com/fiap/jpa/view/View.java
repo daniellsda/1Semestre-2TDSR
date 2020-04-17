@@ -9,18 +9,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.com.fiap.jpa.dao.DepartamentoDAO;
+import br.com.fiap.jpa.dao.impl.DepartamentoDAOImpl;
 import br.com.fiap.jpa.entity.AreaGerente;
 import br.com.fiap.jpa.entity.Departamento;
 import br.com.fiap.jpa.entity.Funcionario;
 import br.com.fiap.jpa.entity.Gerente;
 import br.com.fiap.jpa.entity.Projeto;
 import br.com.fiap.jpa.entity.TipoDepartamento;
+import br.com.fiap.jpa.exception.CommitException;
+import br.com.fiap.jpa.singleton.EntityManagerFactorySingleton;
 
 public class View {
 
 	public static void main(String[] args) {
 		//Instanciar EntityManagerFactory e o EntityManager
-		EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("oracle");
+		EntityManagerFactory fabrica = EntityManagerFactorySingleton.getInstance();
 		EntityManager em = fabrica.createEntityManager();
 		
 		//Persistir o departamento e o gerente
@@ -49,10 +53,15 @@ public class View {
 		f1.setProjetos(lista);
 		f2.setProjetos(lista);
 		
-		em.persist(dep);
-
-		em.getTransaction().begin();
-		em.getTransaction().commit();
+		DepartamentoDAO dao = new DepartamentoDAOImpl(em);
+		
+		try {
+			dao.cadastrar(dep);
+			dao.commit();
+			System.out.println("Sucesso!");
+		} catch (CommitException e) {
+			System.out.println("Erro..");
+		}
 		
 		/*
 		//Pesquisar o departamento de código 1

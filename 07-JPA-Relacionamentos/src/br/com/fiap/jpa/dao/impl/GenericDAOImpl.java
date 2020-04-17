@@ -33,20 +33,27 @@ public abstract class GenericDAOImpl<T,K> implements GenericDAO<T, K>{
 
 	@Override
 	public void remover(K codigo) throws KeyNotFoundException {
-		// TODO Auto-generated method stub
-		
+		T entidade = pesquisar(codigo);
+		if (entidade == null)
+			throw new KeyNotFoundException("Entidade não encontrada");
+		em.remove(entidade);
 	}
 
 	@Override
 	public T pesquisar(K codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(clazz, codigo);
 	}
 
 	@Override
 	public void commit() throws CommitException {
-		// TODO Auto-generated method stub
-		
+		try {
+			em.getTransaction().begin();
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+			throw new CommitException();
+		}
 	}
 
 }

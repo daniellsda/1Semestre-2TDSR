@@ -11,6 +11,8 @@ import br.com.fiap.jpa.dao.impl.FilmeDAOImpl;
 import br.com.fiap.jpa.entity.Classificacao;
 import br.com.fiap.jpa.entity.Filme;
 import br.com.fiap.jpa.entity.Genero;
+import br.com.fiap.jpa.exception.CommitException;
+import br.com.fiap.jpa.exception.KeyNotFoundException;
 import br.com.fiap.jpa.singleton.EntityManagerFactorySingleton;
 
 public class View {
