@@ -3,6 +3,7 @@ package br.com.fiap.restaurante.entity;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,19 +32,31 @@ public class Pedido {
 	@Column(name="dt_pedido")
 	private Calendar data;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cd_garcom", nullable = false)
 	private Garcom garcom;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name="TB_PEDIDO_PRATO",
 			joinColumns = @JoinColumn(name="cd_pedido"),
 			inverseJoinColumns = @JoinColumn(name="cd_prato"))
 	private List<Prato> pratos;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cd_comanda", nullable = false)
 	private Comanda comanda;
+	
+	public Pedido(Calendar data, Garcom garcom, List<Prato> pratos, Comanda comanda) {
+		super();
+		this.data = data;
+		this.garcom = garcom;
+		this.pratos = pratos;
+		this.comanda = comanda;
+	}
+
+	public Pedido() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;

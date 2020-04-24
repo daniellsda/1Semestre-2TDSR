@@ -32,6 +32,16 @@ public class Garcom {
 	
 	@OneToMany(mappedBy = "garcom")
 	private List<Pedido> pedidos;
+	
+	public Garcom(String nome, Funcao funcao) {
+		super();
+		this.nome = nome;
+		this.funcao = funcao;
+	}
+
+	public Garcom() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;

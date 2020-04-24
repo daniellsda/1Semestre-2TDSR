@@ -24,6 +24,15 @@ public class Cliente {
 	
 	@OneToOne(mappedBy = "cliente")
 	private Comanda comanda;
+	
+	public Cliente(String nome) {
+		super();
+		this.nome = nome;
+	}
+
+	public Cliente() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;

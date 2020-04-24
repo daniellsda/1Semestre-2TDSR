@@ -35,6 +35,17 @@ public class Prato {
 	
 	@ManyToMany(mappedBy = "pratos")
 	private List<Pedido> pedidos;
+	
+	public Prato(String nome, float valor, TipoPrato tipo) {
+		super();
+		this.nome = nome;
+		this.valor = valor;
+		this.tipo = tipo;
+	}
+
+	public Prato() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;
