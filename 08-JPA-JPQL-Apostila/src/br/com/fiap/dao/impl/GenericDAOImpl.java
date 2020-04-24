@@ -10,7 +10,7 @@ import br.com.fiap.exception.IdNotFoundException;
 
 public class GenericDAOImpl<T,K> implements GenericDAO<T, K>{
 
-	private EntityManager em;
+	protected EntityManager em;
 	
 	//.class da entidade (usado na busca)
 	private Class<T> classe;
@@ -37,7 +37,7 @@ public class GenericDAOImpl<T,K> implements GenericDAO<T, K>{
 	public void remover(K codigo) throws IdNotFoundException {
 		T entidade = pesquisar(codigo);
 		if (entidade == null){
-			throw new IdNotFoundException("Entidade não encontrada");
+			throw new IdNotFoundException("Entidade nï¿½o encontrada");
 		}
 		em.remove(entidade);
 	}
