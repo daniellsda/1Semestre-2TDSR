@@ -30,7 +30,11 @@ public class CidadeView {
 		}
 		
 		//Pesquisar as cidades por DDD
-		
+		lista = dao.buscarPorDdd(14);
+		//Exibir o nome e o ddd da cidade
+		for(Cidade cidade: lista) {
+			System.out.println(cidade.getNome() + " " + cidade.getDdd());
+		}
 		
 		//Fechar
 		em.close();
