@@ -1,10 +1,13 @@
 package br.com.fiap.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.fiap.dao.GenericDAO;
+import br.com.fiap.entity.Cliente;
 import br.com.fiap.exception.DBException;
 import br.com.fiap.exception.IdNotFoundException;
 
@@ -56,6 +59,13 @@ public class GenericDAOImpl<T,K> implements GenericDAO<T, K>{
 				em.getTransaction().rollback();
 			throw new DBException("Erro no commit", e);
 		}
+	}
+
+	@Override
+	public List<T> listar() {
+		TypedQuery<T> query = em.createQuery("from " + classe.getName(), classe);
+		query.setMaxResults(10); //Configura o máximo de resultados
+		return query.getResultList();
 	}
 
 }

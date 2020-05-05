@@ -14,12 +14,14 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente,Integer> implements C
 		super(entityManager);
 	}
 
+	/*
 	@Override
 	public List<Cliente> listar() {
 		TypedQuery<Cliente> query = em.createQuery("from Cliente", Cliente.class);
 		return query.getResultList();
 	}
-
+	 */
+	
 	@Override
 	public List<Cliente> buscarPorNome(String nome) {
 		TypedQuery<Cliente> query = 
@@ -44,4 +46,39 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente,Integer> implements C
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Cliente> buscarPorNome(String nome, int maximo, int primeiraPosicao) {	
+//		TypedQuery<Cliente> query = 
+//				em.createQuery("from Cliente c where c.nome like :n",Cliente.class);
+//		query.setParameter("n", "%" + nome + "%");
+//		query.setMaxResults(maximo);
+//		query.setFirstResult(primeiraPosicao);
+//		return query.getResultList();
+		
+		return em.createQuery("from Cliente c where c.nome like :n", Cliente.class)
+				.setParameter("n", "%"+ nome + "%")
+				.setMaxResults(maximo)
+				.setFirstResult(primeiraPosicao)
+				.getResultList();
+	}
+
+	//Retornar somente o nome e cpf do cliente
+	@Override
+	public Cliente buscarPorCpf(String cpf) {
+		return em.createQuery("select new Cliente(c.nome, c.cpf) from Cliente c where c.cpf = :pCpf",Cliente.class)
+				.setParameter("pCpf", cpf)
+				.getSingleResult();
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+

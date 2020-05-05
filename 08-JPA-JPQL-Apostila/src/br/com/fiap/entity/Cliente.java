@@ -49,6 +49,12 @@ public class Cliente {
 	
 	public Cliente() {
 	}
+	
+	public Cliente(String nome, String cpf) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+	}
 
 	public String getNome() {
 		return nome;

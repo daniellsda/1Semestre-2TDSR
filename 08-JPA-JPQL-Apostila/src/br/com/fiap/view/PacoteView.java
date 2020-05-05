@@ -1,5 +1,8 @@
 package br.com.fiap.view;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,6 +33,19 @@ public class PacoteView {
 		//Exibir a descrição do pacote e o nome da empresa do transporte
 		lista.forEach(pacote -> 
 			System.out.println(pacote.getDescricao() + " " + pacote.getTransporte().getEmpresa()));
+		
+		//Instancia duas datas específicas para realizar a pesquisa
+		Calendar inicio = new GregorianCalendar(2017, Calendar.AUGUST, 1);
+		Calendar fim = new GregorianCalendar(2018, Calendar.JANUARY, 1);
+		
+		//Pesquisa o pacote por data
+		lista = pDao.buscarPorDatas(inicio, fim);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		//Exibir a descrição do pacote e a data de saída
+		lista.forEach(p -> System.out.println(p.getDescricao() + " " +
+											sdf.format(p.getDataSaida().getTime() )));
 		
 		em.close();
 		fabrica.close();

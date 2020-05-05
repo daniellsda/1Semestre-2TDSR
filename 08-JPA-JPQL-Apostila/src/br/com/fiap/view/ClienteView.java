@@ -27,7 +27,7 @@ public class ClienteView {
 		lista.forEach(item -> System.out.println(item.getNome()));
 		
 		System.out.println("BUSCAR POR NOME");
-		lista = dao.buscarPorNome("a"); //pesquisa por clientes por parte do nome
+		lista = dao.buscarPorNome("a",2,1); //pesquisa por clientes por parte do nome
 		lista.forEach(item -> System.out.println(item.getNome())); //exibe o nome dos clientes
 		
 		System.out.println("BUSCAR POR ESTADO");
@@ -38,6 +38,11 @@ public class ClienteView {
 		System.out.println("BUSCAR POR DIAS RESERVA");
 		lista = dao.buscarPorDiasReserva(10);
 		lista.forEach(c -> System.out.println(c.getNome()));
+		
+		System.out.println("BUSCAR CLIENTE POR CPF:");
+		Cliente cliente = dao.buscarPorCpf("98728018736");
+		System.out.println(cliente.getId() + " " + cliente.getNome() + " " + 
+				cliente.getCpf() + " " + cliente.getDataNascimento());
 		
 		em.close();
 		fabrica.close();
