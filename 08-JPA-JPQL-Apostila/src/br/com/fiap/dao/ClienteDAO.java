@@ -18,4 +18,13 @@ public interface ClienteDAO extends GenericDAO<Cliente,Integer>{
 	
 	Cliente buscarPorCpf(String cpf);
 	
+	//Buscar por parte do nome do cliente e parte do nome da cidade
+	List<Cliente> buscar(String nome, String cidade);
+	
+	//Buscar por estados
+	List<Cliente> buscarPorEstados(List<String> estados);
+	
+	//Contar os clientes por estado
+	long contarPorEstado(String estado);
+	
 }

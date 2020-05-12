@@ -1,5 +1,6 @@
 package br.com.fiap.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,7 +28,7 @@ public class ClienteView {
 		lista.forEach(item -> System.out.println(item.getNome()));
 		
 		System.out.println("BUSCAR POR NOME");
-		lista = dao.buscarPorNome("a",2,1); //pesquisa por clientes por parte do nome
+		lista = dao.buscarPorNome("A"); //pesquisa por clientes por parte do nome
 		lista.forEach(item -> System.out.println(item.getNome())); //exibe o nome dos clientes
 		
 		System.out.println("BUSCAR POR ESTADO");
@@ -43,6 +44,23 @@ public class ClienteView {
 		Cliente cliente = dao.buscarPorCpf("98728018736");
 		System.out.println(cliente.getId() + " " + cliente.getNome() + " " + 
 				cliente.getCpf() + " " + cliente.getDataNascimento());
+		
+		System.out.println("BUSCAR POR NOME E CIDADE:");
+		lista = dao.buscar("Maria", "Sal");
+		lista.forEach(c -> 
+			System.out.println(c.getNome() + " " + c.getEndereco().getCidade().getNome()));
+		
+		System.out.println("BUSCAR POR ESTADOS:");
+		List<String> estados = new ArrayList<String>(); //lista de estados para pesquisa
+		estados.add("BA");
+		estados.add("SP");
+		
+		lista = dao.buscarPorEstados(estados); //pesquisa por estados
+		lista.forEach(c -> 
+			System.out.println(c.getNome() + " " + c.getEndereco().getCidade().getUf()));
+		
+		long qtd = dao.contarPorEstado("BA"); //contar a qtd de clientes de SP
+		System.out.println("TOTAL CLIENTES: " + qtd);
 		
 		em.close();
 		fabrica.close();

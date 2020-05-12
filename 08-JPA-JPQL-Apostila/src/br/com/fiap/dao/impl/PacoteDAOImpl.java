@@ -32,4 +32,19 @@ public class PacoteDAOImpl extends GenericDAOImpl<Pacote,Integer> implements Pac
 				.getResultList();
 	}
 
+	@Override
+	public double somarPrecoPorTransporte(Transporte transporte) {
+		return em.createQuery("select sum(p.preco) from Pacote p "
+				+ "where p.transporte = :t", Double.class)
+				.setParameter("t", transporte)
+				.getSingleResult();
+	}
+
+	@Override
+	public List<Pacote> buscarPorDias(int dias) {
+		return em.createNamedQuery("Pacote.porDias", Pacote.class)
+				.setParameter("qtd", dias)
+				.getResultList();
+	}
+
 }

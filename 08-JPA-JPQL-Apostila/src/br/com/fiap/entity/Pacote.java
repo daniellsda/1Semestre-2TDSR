@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+@NamedQuery(name="Pacote.porDias", query ="select p from Pacote p where p.qtdDias = :qtd")
 
 @Entity
 @SequenceGenerator(name="seqPacote", sequenceName="SEQ_PACOTE", allocationSize=1)

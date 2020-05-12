@@ -26,7 +26,8 @@ public class PacoteView {
 		TransporteDAO tDao = new TransporteDAOImpl(em);
 		
 		//Pesquisa o transporte de código 1
-		Transporte transporte = tDao.pesquisar(2); 
+		Transporte transporte = tDao.pesquisar(1); 
+		
 		//Pesquisa todos os pacotes com o transporte de código 1
 		List<Pacote> lista = pDao.buscarPorTransporte(transporte);
 		
@@ -46,6 +47,14 @@ public class PacoteView {
 		//Exibir a descrição do pacote e a data de saída
 		lista.forEach(p -> System.out.println(p.getDescricao() + " " +
 											sdf.format(p.getDataSaida().getTime() )));
+		
+		//Exibir a soma dos preços dos pacotes do transporte de código 1
+		double total = pDao.somarPrecoPorTransporte(transporte);
+		System.out.println("Total dos preços: " + total);
+		
+		//Exibir os pacotes com qtd de dias igual a 10
+		lista = pDao.buscarPorDias(10);
+		lista.forEach(p -> System.out.println(p.getDescricao() + " " + p.getQtdDias()));
 		
 		em.close();
 		fabrica.close();
