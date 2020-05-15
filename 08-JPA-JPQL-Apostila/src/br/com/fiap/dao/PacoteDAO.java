@@ -1,5 +1,6 @@
 package br.com.fiap.dao;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -15,5 +16,12 @@ public interface PacoteDAO extends GenericDAO<Pacote,Integer>{
 	double somarPrecoPorTransporte(Transporte transporte);
 	
 	List<Pacote> buscarPorDias(int dias);
+	
+	BigDecimal obterMediaPrecoPorData(int mes);
+	
+	double obterMediaPrecoPorQtdDias(int dias);
+	
+	//Retornar a média de preço, qtd dias
+	List<Object[]> obterMediaPrecoPorQtdDias();
 	
 }

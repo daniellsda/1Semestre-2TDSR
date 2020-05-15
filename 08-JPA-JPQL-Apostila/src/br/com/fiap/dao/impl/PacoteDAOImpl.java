@@ -1,5 +1,6 @@
 package br.com.fiap.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -44,6 +45,28 @@ public class PacoteDAOImpl extends GenericDAOImpl<Pacote,Integer> implements Pac
 	public List<Pacote> buscarPorDias(int dias) {
 		return em.createNamedQuery("Pacote.porDias", Pacote.class)
 				.setParameter("qtd", dias)
+				.getResultList();
+	}
+
+	@Override
+	public BigDecimal obterMediaPrecoPorData(int mes) {
+		return (BigDecimal) em.createNativeQuery("SELECT AVG(PRECO) FROM PACOTE WHERE "
+				+ "EXTRACT(MONTH FROM DT_SAIDA) = :m")
+				.setParameter("m", mes)
+				.getSingleResult();
+	}
+
+	@Override
+	public double obterMediaPrecoPorQtdDias(int dias) {
+		return em.createNamedQuery("Pacote.precoMedioPorQtdDias",Double.class)
+				.setParameter("qtd", dias)
+				.getSingleResult();
+	}
+
+	@Override
+	public List<Object[]> obterMediaPrecoPorQtdDias() {
+		return em.createQuery("select avg(p.preco), p.qtdDias from "
+				+ "Pacote p group by p.qtdDias", Object[].class)
 				.getResultList();
 	}
 

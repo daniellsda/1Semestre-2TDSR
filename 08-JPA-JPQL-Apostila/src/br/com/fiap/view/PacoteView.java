@@ -1,5 +1,6 @@
 package br.com.fiap.view;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -55,6 +56,19 @@ public class PacoteView {
 		//Exibir os pacotes com qtd de dias igual a 10
 		lista = pDao.buscarPorDias(10);
 		lista.forEach(p -> System.out.println(p.getDescricao() + " " + p.getQtdDias()));
+		
+		//Exibir o preço médio por qtd de dias
+		double media = pDao.obterMediaPrecoPorQtdDias(10);
+		System.out.println("Preço médio por 10 dias: " + media);
+		
+		//Exibir o preço médio por mês
+		BigDecimal m = pDao.obterMediaPrecoPorData(9);
+		System.out.println("Preço médio no mês 9: " + m);
+		
+		//Listar a média de preços e qtd de dias dos pacotes
+		List<Object[]> objs = pDao.obterMediaPrecoPorQtdDias();
+		//Percorre a lista e exibe os valores da primeira e segunda posição do vetor
+		objs.forEach(item -> System.out.println(item[0] + " " + item[1]));
 		
 		em.close();
 		fabrica.close();
