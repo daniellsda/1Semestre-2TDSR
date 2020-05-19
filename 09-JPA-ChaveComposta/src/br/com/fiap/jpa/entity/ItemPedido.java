@@ -1,20 +1,28 @@
 package br.com.fiap.jpa.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+//Configura a classe que mapeia a chave composta
+@IdClass(ItemPedidoPK.class)
 
 @Entity
 @Table(name="TB_ITEM_PEDIDO")
 public class ItemPedido {
 
-	@ManyToOne
+	@Id
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cd_medicamento")
 	private Medicamento medicamento;
 	
-	@ManyToOne
+	@Id
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="cd_pedido")
 	private Pedido pedido;
 	
@@ -23,6 +31,15 @@ public class ItemPedido {
 	
 	@Column(name="qt_item")
 	private int quantidade;
+	
+	public ItemPedido() {}
+
+	public ItemPedido(Medicamento medicamento, Pedido pedido, double valor, int quantidade) {
+		this.medicamento = medicamento;
+		this.pedido = pedido;
+		this.valor = valor;
+		this.quantidade = quantidade;
+	}
 
 	public Medicamento getMedicamento() {
 		return medicamento;

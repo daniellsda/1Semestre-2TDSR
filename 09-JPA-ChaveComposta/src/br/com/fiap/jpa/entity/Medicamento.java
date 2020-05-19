@@ -36,6 +36,17 @@ public class Medicamento {
 	
 	@OneToMany(mappedBy = "medicamento")
 	private List<ItemPedido> itens;
+	
+	public Medicamento(String nome, Calendar dataValidade, boolean generico) {
+		super();
+		this.nome = nome;
+		this.dataValidade = dataValidade;
+		this.generico = generico;
+	}
+
+	public Medicamento() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;

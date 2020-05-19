@@ -33,6 +33,16 @@ public class Pedido {
 	
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itens;
+	
+	public Pedido(Calendar data, double valor) {
+		super();
+		this.data = data;
+		this.valor = valor;
+	}
+
+	public Pedido() {
+		super();
+	}
 
 	public int getCodigo() {
 		return codigo;
