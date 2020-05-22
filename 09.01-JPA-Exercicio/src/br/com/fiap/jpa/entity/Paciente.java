@@ -33,6 +33,14 @@ public class Paciente {
 	
 	@OneToMany(mappedBy = "paciente")
 	private List<Consulta> consultas;
+	
+	public Paciente() {}
+	
+	public Paciente(String nome, Calendar dataNascimento) {
+		super();
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+	}
 
 	public int getCodigo() {
 		return codigo;

@@ -24,6 +24,15 @@ public class Medico {
 	
 	@OneToMany(mappedBy = "medico")
 	private List<Consulta> consultas;
+	
+	public Medico() {}
+	
+	public Medico(int crm, String nome, String especialidade) {
+		super();
+		this.crm = crm;
+		this.nome = nome;
+		this.especialidade = especialidade;
+	}
 
 	public int getCrm() {
 		return crm;
