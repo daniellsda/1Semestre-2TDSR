@@ -2,10 +2,19 @@ package br.com.fiap.jpa.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Table(name="TB_REPTIL")
+
+@Entity
 public class Reptil extends Animal {
 
+	@Column(name="st_escamas")
 	private boolean escamas;
 	
+	@Column(name="nr_meses_gestacao")
 	private int mesesGestacao;
 	
 	public Reptil() {}

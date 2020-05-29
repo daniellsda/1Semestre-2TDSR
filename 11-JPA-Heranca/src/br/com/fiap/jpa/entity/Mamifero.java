@@ -2,10 +2,24 @@ package br.com.fiap.jpa.entity;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+//@DiscriminatorValue("M")
+
+@Table(name="TB_MAMIFERO")
+//Nome da coluna da PK/FK da tabela (JOINED)
+@PrimaryKeyJoinColumn(name="cd_mamifero")
+
+@Entity
 public class Mamifero extends Animal {
 
+	@Column(name="st_terrestre")
 	private boolean terrestre;
 	
+	@Column(name="sd_cor_pelagem", length = 30)
 	private String corPelagem;
 	
 	public Mamifero() {}
